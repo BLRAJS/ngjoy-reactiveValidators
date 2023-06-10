@@ -45,6 +45,21 @@ import { AppComponent } from './app.component';
 export class AppModule { }   
 ```   
 
+## In your component
+just add NgJoyValidatorsService and you  have access to all validators
+```js 
+import {NgJoyValidatorsService} from "@ngjoy.dev/reactivevalidators";
+...
+...
+...
+constructor(
+  private ngJoyValidatorsService: NgJoyValidatorsService,
+) {
+}
+
+
+```   
+
 ## Reactive Form Validation
 
 🧩 **Conditional Validators**: One of the unique features of `ngJoyValidators` is the ability to add / remove / compare/ disable  / co-require  on or more validators conditionally based on a dependency value from another field or same fields.
