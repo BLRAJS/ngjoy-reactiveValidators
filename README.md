@@ -25,7 +25,7 @@ To help you get started and showcase what `ngJoyValidators` is capable of, we've
 
 To add `ngJoyValidators` to your project, simply run the following command in your terminal:
 
-```npm install @ngjoy/validators ```
+```npm i @ngjoy.dev/reactivevalidators ```
 
 ## Import modules
 To utilize form features, import the FormsModule, ReactiveFormsModule, and **NgJoyValidatorsModule** into your NgModule decorator. These modules equip your forms with advanced and dynamic validation capabilities.
