@@ -1,0 +1,54 @@
+<div class="form-container">
+
+  <form [formGroup]="demoForm">
+    <h3>The conditionalValidators function from NgJoyValidators is a custom validation function that applies certain validators conditionally based on a specific criteria or condition. It is useful when you want the validation of a form field to depend on the value of another form field.</h3>
+
+    <div class="form-field">
+      <label for="first">FirstName Field: <span class="error-class">If name is James then email Field is required and should ends with gmail.com</span></label>
+      <input  [ngClass]="{'error-class': reactiveErrorsService.hasError('firstName',demoForm)}" id="first" formControlName="firstName">
+      <p>{{ reactiveErrorsService.getErrorMessage('firstName',demoForm) }}</p>
+    </div>
+
+    <div class="form-field">
+      <label for="second">LastName Field: </label>
+      <input [ngClass]="{'error-class': reactiveErrorsService.hasError('lastName',demoForm)}" id="second" formControlName="lastName">
+      <p>{{ reactiveErrorsService.getErrorMessage('lastName',demoForm) }}</p>
+    </div>
+
+    <div class="form-field">
+      <label for="age">Age Field: <span class="error-class">If age is less than 18 then beer amount if required , min 1 and max 7 </span></label>
+      <input [ngClass]="{'error-class': reactiveErrorsService.hasError('age',demoForm)}"  id="age" type="number" formControlName="age">
+      <p>{{ reactiveErrorsService.getErrorMessage('age',demoForm) }}</p>
+    </div>
+
+    <div class="form-field">
+      <label for="third">Country Field: <span class="error-class">If country is North Korea then Phone Field is required , starts with 0032,0039</span> </label>
+    <select  [ngClass]="{'error-class': reactiveErrorsService.hasError('country',demoForm)}" id="third" formControlName="country">
+      <option *ngFor="let country of countries" [value]="country.code">
+        {{ country.name }}
+      </option>
+    </select>
+    </div>
+
+    <div class="form-field">
+      <label for="4rth">Phone Field: </label>
+      <input [ngClass]="{'error-class': reactiveErrorsService.hasError('phone',demoForm)}" type="string" id="4rth" formControlName="phone">
+      <p>{{ reactiveErrorsService.getErrorMessage('phone',demoForm) }}</p>
+    </div>
+
+    <div class="form-field">
+      <label for="email">Email Field: </label>
+      <input [ngClass]="{'error-class': reactiveErrorsService.hasError('email',demoForm)}" type="string" id="email" formControlName="email">
+      <p>{{ reactiveErrorsService.getErrorMessage('email',demoForm) }}</p>
+    </div>
+
+
+    <div class="form-field">
+      <label for="age">Beer Amount Field: </label>
+      <input [ngClass]="{'error-class': reactiveErrorsService.hasError('beerAmount',demoForm)}" id="beerAmount" type="number" formControlName="beerAmount">
+      <p>{{ reactiveErrorsService.getErrorMessage('beerAmount',demoForm) }}</p>
+    </div>
+
+    <button [disabled]="!demoForm.valid">Submit</button>
+  </form>
+</div>

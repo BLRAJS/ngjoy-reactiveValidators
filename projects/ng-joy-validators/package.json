@@ -1,0 +1,21 @@
+{
+  "name": "@ngjoy/reactiveValidators",
+  "version": "1.0.0",
+  "peerDependencies": {
+    "@angular/common": "^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0",
+    "@angular/core": "^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false,
+  "author": "Bledar Ramo",
+  "license": "MIT",
+  "description": "A comprehensive and dynamic set of Angular validators for reactive forms. It's super lightweight and offers more than 50 validators for almost any use case , Plus 7 extremely flexible conditional dynamic validators",
+  "keywords": ["angular", "form", "validators", "validation", "dynamic", "ngJoyValidators", "custom validators", "angular form validators", "formArray validators", "conditional validators"],
+  "homepage": "https://ngjoy.dev/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BLRAJS/ngjoy-reactiveValidators.git"
+  }
+}

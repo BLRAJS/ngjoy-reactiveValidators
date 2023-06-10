@@ -1,0 +1,67 @@
+<div class="form-container">
+
+  <form [formGroup]="demoForm">
+    <h4>coRequiredValidator is a custom validator that checks if at least one of a group of controls has a value. This could be useful when you have a situation where a user must provide at least one type of contact information, such as a phone number or an email, but you don't mind which one they provide</h4>
+    <pre>NgJoyValidators.coRequiredValidator('email', 'phone', 'Either field1 or field2 is required.')</pre>
+
+    <div class="form-field">
+      <label for="first">Email Field: </label>
+      <input  [ngClass]="{'error-class': reactiveErrorsService.hasError('email',demoForm)}" id="first" formControlName="email">
+      <p>{{ reactiveErrorsService.getErrorMessage('email',demoForm) }}</p>
+    </div>
+
+    <div class="form-field">
+      <label for="second">Phone Field: </label>
+      <input [ngClass]="{'error-class': reactiveErrorsService.hasError('phone',demoForm)}" id="second" formControlName="phone">
+      <p>{{ reactiveErrorsService.getErrorMessage('phone',demoForm) }}</p>
+    </div>
+    <button [disabled]="!demoForm.valid">Submit</button>
+  </form>
+</div>
+
+
+
+
+
+<form [formGroup]="companyForm">
+  <h3>The conditionalDisableValidator is a custom validator that disables/enables a form control based on the state of another form control.</h3>
+
+  <div class="form-field">
+    <label for="businessType">Business Type: <span class="error-class">If business Type is Self Employed then Company name will be disabled</span> </label>
+    <select formControlName="businessType" id="businessType" [ngClass]="{'error-class': reactiveErrorsService.hasError('businessType',companyForm)}">
+      <option value="">Select Business Type</option>
+      <option value="Corporation">Corporation</option>
+      <option value="Non-profit">Non-profit</option>
+      <option value="Self Employed">Self Employed</option>
+    </select>
+    <p>{{ reactiveErrorsService.getErrorMessage('businessType',companyForm) }}</p>
+  </div>
+
+  <div class="form-field">
+    <label for="companyName">Company Name:</label>
+    <input type="text" id="companyName" formControlName="companyName" placeholder="Company Name"
+           [ngClass]="{'error-class': reactiveErrorsService.hasError('companyName',companyForm)}" />
+    <p>{{ reactiveErrorsService.getErrorMessage('companyName',companyForm) }}</p>
+  </div>
+
+  <div class="form-field">
+    <label for="companySize">Company Size:</label>
+    <input type="text" id="companySize" formControlName="companySize" placeholder="Company Size"
+           [ngClass]="{'error-class': reactiveErrorsService.hasError('companySize',companyForm)}" />
+    <p>{{ reactiveErrorsService.getErrorMessage('companySize',companyForm) }}</p>
+  </div>
+
+  <div class="form-field">
+    <label for="companyLocation">Company Location:</label>
+    <input type="text" id="companyLocation" formControlName="companyLocation" placeholder="Company Location"
+           [ngClass]="{'error-class': reactiveErrorsService.hasError('companyLocation',companyForm)}" />
+    <p>{{ reactiveErrorsService.getErrorMessage('companyLocation',companyForm) }}</p>
+  </div>
+
+  <div class="form-field">
+    <label for="companyIndustry">Company Industry:</label>
+    <input type="text" id="companyIndustry" formControlName="companyIndustry" placeholder="Company Industry"
+           [ngClass]="{'error-class': reactiveErrorsService.hasError('companyIndustry',companyForm)}" />
+    <p>{{ reactiveErrorsService.getErrorMessage('companyIndustry',companyForm) }}</p>
+  </div>
+</form>

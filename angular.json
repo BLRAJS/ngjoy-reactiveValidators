@@ -99,6 +99,39 @@
           }
         }
       }
+    },
+    "ngJoyValidators": {
+      "projectType": "library",
+      "root": "projects/ng-joy-validators",
+      "sourceRoot": "projects/ng-joy-validators/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ng-joy-validators/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ng-joy-validators/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ng-joy-validators/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/ng-joy-validators/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
     }
   }
 }

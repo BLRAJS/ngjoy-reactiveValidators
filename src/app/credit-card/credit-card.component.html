@@ -1,0 +1,43 @@
+<form [formGroup]="paymentForm" (ngSubmit)="submitForm()">
+  <div>
+    <label for="cardNumber">Card Number:</label>
+    <input [ngClass]="{'error-class': reactiveErrorsService.hasError('cardNumber',paymentForm)}" id="cardNumber" type="text" formControlName="cardNumber">
+      <p>{{ reactiveErrorsService.getErrorMessage('cardNumber',paymentForm) }}</p>
+
+
+    <label for="expiryDate">Expiry Date:</label>
+    <input [ngClass]="{'error-class': reactiveErrorsService.hasError('expiryDate',paymentForm)}" id="expiryDate" type="text" formControlName="expiryDate">
+    <p>{{ reactiveErrorsService.getErrorMessage('expiryDate',paymentForm) }}</p>
+
+
+    <label for="cardNumber">Cvv:</label>
+    <input [ngClass]="{'error-class': reactiveErrorsService.hasError('cvv',paymentForm)}" id="cvv" type="text" formControlName="cvv">
+    <p>{{ reactiveErrorsService.getErrorMessage('cvv',paymentForm) }}</p>
+  </div>
+
+
+
+  <input [ngClass]="{'error-class': reactiveErrorsService.hasError('iban',paymentForm)}" type="text" formControlName="iban" placeholder="Enter IBAN" />
+
+  <small  class="error-class" *ngIf="paymentForm.touched && paymentForm.get('iban')?.errors && paymentForm.get('iban')?.errors?.['ibanInvalid']">
+
+        <span *ngIf="paymentForm.get('iban')?.errors?.['error']?.['countryUnsupported']">
+      Country not supported
+    </span>
+    <span *ngIf="paymentForm.get('iban')?.errors?.['error']?.['codeLengthInvalid']">
+      IBAN code length is invalid
+    </span>
+
+    <span *ngIf="paymentForm.get('iban')?.errors?.['error']?.patternInvalid">
+  IBAN Code pattern is invalid
+</span>
+  </small>
+
+
+  <label for="currencyCode">Currency Code:</label>
+  <input [ngClass]="{'error-class': reactiveErrorsService.hasError('currencyCode',paymentForm)}" id="currencyCode" type="text" formControlName="currencyCode">
+  <p>{{ reactiveErrorsService.getErrorMessage('currencyCode',paymentForm) }}</p>
+
+
+  <button type="submit">Submit</button>
+</form>

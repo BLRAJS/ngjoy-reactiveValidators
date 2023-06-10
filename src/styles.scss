@@ -1,1 +1,56 @@
 /* You can add global styles to this file, and also import other style files */
+form {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #e5e5e5;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+
+  input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #e5e5e5;
+    border-radius: 3px;
+  }
+
+  .error-class {
+    border-color: #ff3860;
+  }
+
+  p {
+    color: #ff3860;
+    font-size: 12px;
+  }
+
+  button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    background-color: #3273dc;
+    color: #ffffff;
+    cursor: pointer;
+
+    &:disabled {
+      background-color: #e5e5e5;
+      cursor: not-allowed;
+    }
+  }
+
+  h2 {
+    margin-top: 20px;
+  }
+}
+
+
+.error-class {
+  border: 1px solid red;
+}

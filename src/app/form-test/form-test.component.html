@@ -1,0 +1,114 @@
+
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+  <h3>endsWith / oneOf / range / greaterThanEqualTo / startsWith / password / compare / sumOfFields /
+    minMaxArrayLength</h3>
+
+  <label for="first-name">First Name: </label>
+  <input [ngClass]="{'error-class': reactiveErrorsService.hasError('firstName',profileForm)}" id="first-name"
+         type="text" formControlName="firstName">
+  <p>{{ reactiveErrorsService.getErrorMessage('firstName', profileForm) }}</p>
+
+  <label for="last-name">Last Name: </label>
+  <input [ngClass]="{'error-class': reactiveErrorsService.hasError('lastName',profileForm)}" id="last-name" type="text"
+         formControlName="lastName">
+  <p>{{ reactiveErrorsService.getErrorMessage('lastName', profileForm) }}</p>
+
+  <label for="age">Age: </label>
+  <input [ngClass]="{'error-class': reactiveErrorsService.hasError('age',profileForm)}" id="age" type="number"
+         formControlName="age">
+  <p>{{ reactiveErrorsService.getErrorMessage('age', profileForm) }}</p>
+
+  <label for="beer">How many Beers: </label>
+  <input [ngClass]="{'error-class': reactiveErrorsService.hasError('beers',profileForm)}" id="beer" type="number"
+         formControlName="beers">
+  <p>{{ reactiveErrorsService.getErrorMessage('beers', profileForm) }}</p>
+
+
+  <label for="phone">phone: </label>
+  <input [ngClass]="{'error-class': reactiveErrorsService.hasError('phone',profileForm)}" id="phone" type="text"
+         formControlName="phone">
+  <p>{{ reactiveErrorsService.getErrorMessage('phone', profileForm) }}</p>
+
+  <label for="password">Password: </label>
+  <input [ngClass]="{'error-class': reactiveErrorsService.hasError('password',profileForm)}" id="password" type="text"
+         formControlName="password">
+  <p>{{ reactiveErrorsService.getErrorMessage('password', profileForm) }}</p>
+
+
+  <label for="repeatPass">Repeat Password: </label>
+  <input [ngClass]="{'error-class': reactiveErrorsService.hasError('repeatPass',profileForm)}" id="repeatPass"
+         type="text" formControlName="repeatPass">
+  <p>{{ reactiveErrorsService.getErrorMessage('repeatPass', profileForm) }}</p>
+
+  <div formGroupName="address">
+    <h2>Address</h2>
+
+    <label for="street">Street: </label>
+    <input [ngClass]="{'error-class': reactiveErrorsService.hasError('address.street',profileForm)}" id="street"
+           type="text" formControlName="street">
+    <p>{{ reactiveErrorsService.getErrorMessage('address.street', profileForm) }}</p>
+
+    <label for="city">City: </label>
+    <input [ngClass]="{'error-class': reactiveErrorsService.hasError('address.city',profileForm)}" id="city" type="text"
+           formControlName="city">
+    <p>{{ reactiveErrorsService.getErrorMessage('address.city', profileForm) }}</p>
+
+    <label for="state">State: </label>
+    <input [ngClass]="{'error-class': reactiveErrorsService.hasError('address.state',profileForm)}" id="state"
+           type="text" formControlName="state">
+    <p>{{ reactiveErrorsService.getErrorMessage('address.state', profileForm) }}</p>
+
+    <label for="zip">Zip Code: </label>
+    <input [ngClass]="{'error-class': reactiveErrorsService.hasError('address.zip',profileForm)}" id="zip" type="text"
+           formControlName="zip">
+    <p>{{ reactiveErrorsService.getErrorMessage('address.zip', profileForm) }}</p>
+
+
+    <label for="salary">Salary Code: </label>
+    <input [ngClass]="{'error-class': reactiveErrorsService.hasError('address.salary',profileForm)}" id="salary "
+           type="number" formControlName="salary">
+    <p>{{ reactiveErrorsService.getErrorMessage('address.salary', profileForm) }}</p>
+
+
+    <label for="rentAmount">Rent Amount Code: </label>
+    <input [ngClass]="{'error-class': reactiveErrorsService.hasError('address.rentAmount',profileForm)}" id="rentAmount"
+           type="number" formControlName="rentAmount">
+    <p>{{ reactiveErrorsService.getErrorMessage('address.rentAmount', profileForm) }}</p>
+
+
+    <label for="budget">Budget Code: </label>
+    <input [ngClass]="{'error-class': reactiveErrorsService.hasError('address.budget',profileForm)}" id="budget"
+           type="number" formControlName="budget">
+    <p>{{ reactiveErrorsService.getErrorMessage('address.budget', profileForm) }}</p>
+
+    <p>{{ reactiveErrorsService.getErrorMessage('address', profileForm) }}</p>
+
+  </div>
+
+  <div formArrayName="aliases">
+    <h2>Aliases</h2>
+    <button type="button" (click)="addAlias()">+ Add another alias</button>
+    <div *ngFor="let alias of aliases.controls; let i=index">
+      <label for="alias-{{ i }}">Alias:</label>
+
+      <div class="aliases">
+        <input [ngClass]="{'error-class': reactiveErrorsService.hasError('aliases.'+i.toString(),profileForm)}"
+               id="alias-{{ i }}" type="text" [formControlName]="i">
+        <button type="button" (click)="removeAlias(i)">-</button>
+      </div>
+
+      <p>{{ reactiveErrorsService.getErrorMessage('aliases.' + i.toString(), profileForm) }}</p>
+    </div>
+    <p>{{ reactiveErrorsService.getErrorMessage('aliases', profileForm) }}</p>
+  </div>
+
+
+  <p>Complete the form to enable button.</p>
+  <button type="submit" [disabled]="!profileForm.valid">Submit</button>
+</form>
+
+<hr>
+
+<p>Form Value: {{ profileForm.value | json }}</p>
+<p>Form Status: {{ profileForm.status }}</p>
+

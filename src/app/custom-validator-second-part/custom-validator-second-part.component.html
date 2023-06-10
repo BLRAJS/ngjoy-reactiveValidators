@@ -1,0 +1,215 @@
+
+<form [formGroup]="userForm">
+
+<h3>asciiValidator / noWhitespace / digitValidator / emailDomain / url / scriptLanguageType ,
+  sanitizeInput / json / latitude / lowerCase / maxDate / minDate , numeric , extension / fileSize and much more</h3>
+  <!-- firstName -->
+
+  <div>
+    <label for="firstName">firstName <small>(Name can only contain ASCII characters and no white spaces</small></label>
+    <input [ngClass]="{'error-class': reactiveErrorsService.hasError('firstName',userForm)}" id="firstName" type="text" formControlName="firstName">
+    <p>{{ reactiveErrorsService.getErrorMessage('firstName',userForm) }}</p>
+  </div>
+
+  <!-- lastName -->
+
+  <div>
+    <label for="lastName">lastName <small>(Name can only contain ASCII characters and no white spaces</small></label>
+    <input [ngClass]="{'error-class': reactiveErrorsService.hasError('firstName',userForm)}" id="lastName" type="text" formControlName="lastName">
+    <p>{{ reactiveErrorsService.getErrorMessage('lastName',userForm) }}</p>
+  </div>
+
+  <!-- Email -->
+  <div>
+    <label for="email">Email <small>Email domain must be example.com</small> </label>
+    <input [ngClass]="{'error-class': reactiveErrorsService.hasError('email',userForm)}" id="email" type="email" formControlName="email">
+    <p>{{ reactiveErrorsService.getErrorMessage('email',userForm) }}</p>
+  </div>
+
+  <!-- Website -->
+  <div>
+    <label for="website">Website <small>Website must be a valid URL.</small></label>
+    <input [ngClass]="{'error-class': reactiveErrorsService.hasError('website',userForm)}" id="website" type="url" formControlName="website">
+    <p>{{ reactiveErrorsService.getErrorMessage('website',userForm) }}</p>
+  </div>
+
+  <!-- Script Example -->
+  <div>
+    <label for="scriptExample">Script Example <small>Input must only contain Latin script characters.</small></label>
+    <input [ngClass]="{'error-class': reactiveErrorsService.hasError('scriptExample',userForm)}" id="scriptExample" type="text" formControlName="scriptExample">
+    <p>{{ reactiveErrorsService.getErrorMessage('scriptExample',userForm) }}</p>
+  </div>
+
+  <!-- Sanitized Input -->
+  <div>
+    <label for="sanitizedInput">Sanitized Input </label>
+    <input [ngClass]="{'error-class': reactiveErrorsService.hasError('sanitizedInput',userForm)}" id="sanitizedInput" type="text" formControlName="sanitizedInput">
+    <p>{{ reactiveErrorsService.getErrorMessage('sanitizedInput',userForm) }}</p>
+  </div>
+
+  <!-- JSON Field -->
+  <div>
+    <label for="jsonField">JSON Field</label>
+    <input [ngClass]="{'error-class': reactiveErrorsService.hasError('jsonField',userForm)}" id="jsonField" type="text" formControlName="jsonField">
+    <p>{{ reactiveErrorsService.getErrorMessage('jsonField',userForm) }}</p>
+  </div>
+
+  <!-- Latitude Field -->
+  <div>
+    <label for="latitudeField">Latitude Field</label>
+    <input [ngClass]="{'error-class': reactiveErrorsService.hasError('latitudeField',userForm)}" id="latitudeField" type="text" formControlName="latitudeField">
+    <p>{{ reactiveErrorsService.getErrorMessage('latitudeField',userForm) }}</p>
+  </div>
+
+  <!-- Leap Year Field -->
+  <div>
+    <label for="leapYearField">Leap Year Field</label>
+    <input [ngClass]="{'error-class': reactiveErrorsService.hasError('leapYearField',userForm)}" id="leapYearField" type="text" formControlName="leapYearField">
+    <p>{{ reactiveErrorsService.getErrorMessage('leapYearField',userForm) }}</p>
+  </div>
+
+  <!-- Latitude Longitude Field -->
+  <div>
+    <label for="latLongField">Latitude Longitude Field</label>
+    <input [ngClass]="{'error-class': reactiveErrorsService.hasError('latLongField',userForm)}" id="latLongField" type="text" formControlName="latLongField">
+    <p>{{ reactiveErrorsService.getErrorMessage('latLongField',userForm) }}</p>
+  </div>
+
+  <!-- Longitude Field -->
+  <div>
+    <label for="longitudeField">Longitude Field</label>
+    <input [ngClass]="{'error-class': reactiveErrorsService.hasError('longitudeField',userForm)}" id="longitudeField" type="text" formControlName="longitudeField">
+    <p>{{ reactiveErrorsService.getErrorMessage('longitudeField',userForm) }}</p>
+  </div>
+
+  <!-- Lowercase Field -->
+  <div>
+    <label for="lowerCaseField">Lowercase Field</label>
+    <input [ngClass]="{'error-class': reactiveErrorsService.hasError('lowerCaseField',userForm)}" id="lowerCaseField" type="text" formControlName="lowerCaseField">
+    <p>{{ reactiveErrorsService.getErrorMessage('lowerCaseField',userForm) }}</p>
+  </div>
+
+  <!-- Uppercase Field -->
+  <div>
+    <label for="upperCaseField">Lowercase Field</label>
+    <input [ngClass]="{'error-class': reactiveErrorsService.hasError('upperCaseField',userForm)}" id="upperCaseField" type="text" formControlName="upperCaseField">
+    <p>{{ reactiveErrorsService.getErrorMessage('upperCaseField',userForm) }}</p>
+  </div>
+
+  <!-- Mac Address Field -->
+  <div>
+    <label for="macField">Mac Address Field</label>
+    <input [ngClass]="{'error-class': reactiveErrorsService.hasError('macField',userForm)}" id="macField" type="text" formControlName="macField">
+    <p>{{ reactiveErrorsService.getErrorMessage('macField',userForm) }}</p>
+  </div>
+
+  <!--...and so on for the rest of the fields-->
+
+
+  <!-- Max Date Field -->
+  <div>
+    <label for="maxDateField">Max Date Field</label>
+    <input [ngClass]="{'error-class': reactiveErrorsService.hasError('maxDateField',userForm)}" id="maxDateField" type="date" data-date-format="DD MMMM YYYY" formControlName="maxDateField">
+    <p>{{ reactiveErrorsService.getErrorMessage('maxDateField',userForm) }}</p>
+  </div>
+
+  <!-- Max Number Field -->
+  <div>
+    <label for="maxNumberField">Max Number Field</label>
+    <input [ngClass]="{'error-class': reactiveErrorsService.hasError('maxNumberField',userForm)}" id="maxNumberField" type="number" formControlName="maxNumberField">
+    <p>{{ reactiveErrorsService.getErrorMessage('maxNumberField',userForm) }}</p>
+  </div>
+
+  <!-- Min Date Field -->
+  <div>
+    <label for="minDateField">Min Date Field</label>
+    <input [ngClass]="{'error-class': reactiveErrorsService.hasError('minDateField',userForm)}" id="minDateField" type="date" formControlName="minDateField">
+    <p>{{ reactiveErrorsService.getErrorMessage('minDateField',userForm) }}</p>
+  </div>
+
+  <!-- Min Number Field -->
+  <div>
+    <label for="minNumberField">Min Number Field</label>
+    <input [ngClass]="{'error-class': reactiveErrorsService.hasError('minNumberField',userForm)}" id="minNumberField" type="number" formControlName="minNumberField">
+    <p>{{ reactiveErrorsService.getErrorMessage('minNumberField',userForm) }}</p>
+  </div>
+
+  <!-- Numeric Field -->
+  <div>
+    <label for="numericField">Numeric Field</label>
+    <input [ngClass]="{'error-class': reactiveErrorsService.hasError('numericField',userForm)}" id="numericField" type="text" formControlName="numericField">
+    <p>{{ reactiveErrorsService.getErrorMessage('numericField',userForm) }}</p>
+  </div>
+
+  <!-- Odd Field -->
+  <div>
+    <label for="oddField">Odd Field</label>
+    <input [ngClass]="{'error-class': reactiveErrorsService.hasError('oddField',userForm)}" id="oddField" type="number" formControlName="oddField">
+    <p>{{ reactiveErrorsService.getErrorMessage('oddField',userForm) }}</p>
+  </div>
+
+  <!-- Port Field -->
+  <div>
+    <label for="portField">Port Field</label>
+    <input [ngClass]="{'error-class': reactiveErrorsService.hasError('portField',userForm)}" id="portField" type="number" formControlName="portField">
+    <p>{{ reactiveErrorsService.getErrorMessage('portField',userForm) }}</p>
+  </div>
+
+  <!-- Prime Number Field -->
+  <div>
+    <label for="primeNumberField">Prime Number Field</label>
+    <input [ngClass]="{'error-class': reactiveErrorsService.hasError('primeNumberField',userForm)}" id="primeNumberField" type="number" formControlName="primeNumberField">
+    <p>{{ reactiveErrorsService.getErrorMessage('primeNumberField',userForm) }}</p>
+  </div>
+
+
+  <!--...continue this pattern for the rest of the fields-->
+  <div>
+    <label for="timeField">Time Field</label>
+    <input [ngClass]="{'error-class': reactiveErrorsService.hasError('timeField',userForm)}" id="timeField" type="text" formControlName="timeField">
+    <p>{{ reactiveErrorsService.getErrorMessage('timeField',userForm) }}</p>
+  </div>
+
+  <!-- Extension Field -->
+  <div>
+    <label for="extensionField">Extension Field</label>
+    <input [ngClass]="{'error-class': reactiveErrorsService.hasError('extensionField',userForm)}" id="extensionField" type="text" formControlName="extensionField">
+    <p>{{ reactiveErrorsService.getErrorMessage('extensionField',userForm) }}</p>
+  </div>
+
+  <!-- Even Field -->
+  <div>
+    <label for="evenField">Even Field</label>
+    <input [ngClass]="{'error-class': reactiveErrorsService.hasError('evenField',userForm)}" id="evenField" type="text" formControlName="evenField">
+    <p>{{ reactiveErrorsService.getErrorMessage('evenField',userForm) }}</p>
+  </div>
+
+  <!-- Factor Field -->
+  <div>
+    <label for="factorField">Factor Field</label>
+    <input [ngClass]="{'error-class': reactiveErrorsService.hasError('factorField',userForm)}" id="factorField" type="number" formControlName="factorField">
+    <p>{{ reactiveErrorsService.getErrorMessage('factorField',userForm) }}</p>
+  </div>
+
+  <!-- File Field -->
+  <div>
+    <label for="fileField">File Field</label>
+    <input [ngClass]="{'error-class': reactiveErrorsService.hasError('fileField',userForm)}"  (change)="handleFileInput($event)" id="fileField" type="file" multiple formControlName="fileField">
+    <p>{{ reactiveErrorsService.getErrorMessage('fileField',userForm) }}</p>
+  </div>
+
+  <!-- File Size Field -->
+  <div>
+    <label for="fileSizeField">File Size Field</label>
+    <input [ngClass]="{'error-class': reactiveErrorsService.hasError('fileSizeField',userForm)}" (change)="handleFileInput($event)" id="fileSizeField" type="file" formControlName="fileSizeField">
+    <p>{{ reactiveErrorsService.getErrorMessage('fileSizeField',userForm) }}</p>
+  </div>
+
+  <!-- IP Field -->
+  <div>
+    <label for="ipField">IP Field</label>
+    <input [ngClass]="{'error-class': reactiveErrorsService.hasError('ipField',userForm)}" id="ipField" type="text" formControlName="ipField">
+    <p>{{ reactiveErrorsService.getErrorMessage('ipField',userForm) }}</p>
+  </div>
+
+</form>
