@@ -6,9 +6,9 @@ import {ConditionalValidatorsComponent} from "./conditional-validators/condition
 import {CoRequiredConditionallyComponent} from "./co-required-conditionally/co-required-conditionally.component";
 import {FormTestComponent} from "./form-test/form-test.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {NgJoyValidatorsModule} from "ngJoyValidators";
 import { CreditCardComponent } from './credit-card/credit-card.component';
 import { CustomValidatorSecondPartComponent } from './custom-validator-second-part/custom-validator-second-part.component';
+import {NgJoyValidatorsModule} from "ngJoyValidators";
 
 @NgModule({
   declarations: [
