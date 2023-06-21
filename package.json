@@ -1,6 +1,6 @@
 {
   "name": "ngjoy-validators-workspace",
-  "version": "1.0.0",
+  "version": "1.0.8",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

@@ -1,4 +1,4 @@
-# ngJoyValidators
+# ngJoyValidators - Angular Reactive Custom Validators
 
 Welcome to `ngJoyValidators`!  This feature-packed library serves up advanced and conditional validation features for your Angular reactive forms. Compatible with Angular versions 12 through 16, it's super light on size but heavy on functionality and flexibility. Packed with a suite of around 43 validators and a bonus set of 7 conditional validators for tackling more complex scenarios, `ngJoyValidators` has all your reactive form needs under control.
 
@@ -18,7 +18,7 @@ Here's a taste of what you can expect:
 ## 📚 Demo Project
 
 To help you get started and showcase what `ngJoyValidators` is capable of, we've put together an Angular workspace project complete with components demonstrating several validators. Whether you're new to `ngJoyValidators` or looking to explore more advanced use-cases, our demo project is a great place to start.
-
+https://github.com/BLRAJS/ngjoy-reactiveValidators
 
 
 ## 💾 Installation
@@ -28,7 +28,7 @@ To add `ngJoyValidators` to your project, simply run the following command in yo
 ```npm i @ngjoy.dev/reactivevalidators ```
 
 ## Import modules
-To utilize form features, import the FormsModule, ReactiveFormsModule, and **NgJoyValidatorsModule** into your NgModule decorator. These modules equip your forms with advanced and dynamic validation capabilities.
+To utilize form features, import the FormsModule, ReactiveFormsModule, and **NgJoyValidatorsModule** into your NgModule decorator.
 ```js 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -49,15 +49,9 @@ export class AppModule { }
 just add NgJoyValidatorsService and you  have access to all validators
 ```js 
 import {NgJoyValidatorsService} from "@ngjoy.dev/reactivevalidators";
-...
-...
-...
-constructor(
-  private ngJoyValidatorsService: NgJoyValidatorsService,
-) {
+
+constructor(private ngJoyValidatorsService: NgJoyValidatorsService) {
 }
-
-
 ```   
 
 ## Reactive Form Validation
@@ -72,8 +66,6 @@ constructor(
 5. [lessThanEqualTo](#lessthanequalto)
 6. [greaterThanEqualTo](#greaterthanequalto)
 7. [lessThan](#lessthan)
-
-
 
 
 🌈 **Versatility**: With around 50 validators at your disposal, you'll have a tool for nearly every situation. No matter the complexity of your form or the specific rules you need to enforce, `ngJoyValidators` has got you covered.
@@ -137,47 +129,110 @@ Use Cases:
 The function can take an optional `conditionalCheck` function. This function can be used to provide a custom condition instead of the default one. The custom condition could be based on complex logic involving multiple form controls.
 
 > Reactive Form Validation
-```js //Suppose you are building a registration form, and you have two fields:  
+```js 
+// In a registration form, the conditionalValidators function is used to apply the Validators.
+// required validator on the promoCode text field only when the hasPromoCode checkbox is checked.
+this.registrationForm = this.fb.group({ 
+  hasPromoCode: [false],  
+  promoCode: ['', this.conditionalValidators<boolean>( 'hasPromoCode', Validators.required, value => value === true )]
+});
+
+// In an article submission form, the conditionalValidators function applies Validators.required 
+// and Validators.min(1) on the imageCount field only if the hasImages checkbox is checked. 
+// This ensures that a user enters the number of images (greater than 0) only when they've 
+// indicated they are including images.
+this.articleForm = this.fb.group({ 
+  hasImages: [false],  
+  imageCount: ['', this.conditionalValidators<boolean>( 'hasImages', 
+    [Validators.required, Validators.min(1)], value => value === true )] 
+});  
+
+// The studentForm has three fields: 'age' (required), 'isStudent' (optional), 
+// and 'guardianContact' which is required only when the user is a student and their 
+// age is less than 18.
+this.studentForm = this.fb.group({ 
+  age: ['', Validators.required],  
+  isStudent: [false],  
+  guardianContact: ['', this.conditionalValidators<boolean>( 'isStudent', [Validators.required],  
+ (isStudent, formControl) => isStudent && formControl.parent?.get('age')?.value < 18 )]
+});  
   
-//1.  A checkbox labeled "Do you have a promo code?" 
-//(`hasPromoCode` field)  
-//2.  A text input to enter the promo code (`promoCode` field)  
-  
-//The `promoCode` field is required only when the `hasPromoCode`
-// checkbox is checked. You can use the `conditionalValidators`
-//function to conditionally apply the `Validators.required`
-//validator on the `promoCode` field.  
-this.registrationForm = this.fb.group({ hasPromoCode: [false],  
- promoCode: ['', this.conditionalValidators<boolean>( 'hasPromoCode', Validators.required, value => value === true )] });  
-  
-  
-//Let's consider a scenario where we have a form to submit an article. There are two fields:  
-  
-//1.  A checkbox labeled "Are you including images?" (`hasImages` field)  
-//2.  A number input to enter the number of images (`imageCount` field)  
-  
-//The `imageCount` field is required and must be greater than 0 only when the `hasImages` checkbox is checked. You can use the `conditionalValidators` function to conditionally apply both `Validators.required` and a custom `Validators.min(1)` validators on the `imageCount` field.  
-  
-//Here's an example:  
-  
-this.articleForm = this.fb.group({ hasImages: [false],  
-imageCount: ['', this.conditionalValidators<boolean>( 'hasImages', [Validators.required, Validators.min(1)],  
- value => value === true )] });  
-  
-// another use case  
-this.studentForm = this.fb.group({ age: ['', Validators.required],  
-isStudent: [false],  
-guardianContact: ['', this.conditionalValidators<boolean>( 'isStudent', [Validators.required],  
- (isStudent, formControl) => isStudent && formControl.parent?.get('age')?.value < 18 )]});  
-  
-// another use case  
-firstName: [''],  
-email: ['', [this.ngJoyDynamicValidatorsService.conditionalValidators<string>(    
-  'firstName',    
-  [Validators.required,    
- this.ngJoyValidatorsService.endsWith('gmail.com', "Only gmail.com please"),    
-  ],    
-(value: any,emailControl:FormControl) => value === "James" || emailControl.value.includes("test"), )]],  
+// The testGroup form contains two fields: 'firstName' and 'email'. The 'email' field is 
+// conditionally required and must end with 'gmail.com' only when the 'firstName' field is 
+// filled with "James" or the 'email' itself includes "test".
+this.testGroup = this.fb.group({
+  firstName: [''],  
+  email: ['', [this.ngJoyDynamicValidatorsService.conditionalValidators<string>('firstName',    
+  [Validators.required, this.ngJoyValidatorsService.endsWith('gmail.com', "Only gmail.com please")],    
+  (value: any,emailControl:FormControl) => value === "James" || emailControl.value.includes("test"))]]
+});
+
+ //In an online product listing form, certain fields like product details and review comments
+// become conditionally required based on the type of product and its rating, showcasing the
+// dynamic nature and flexibility of conditionalValidators.
+
+this.productListingForm = this.fb.group({
+  productName: ['', Validators.required],
+  productPrice: ['', [Validators.required, Validators.min(1)]],
+  productCategory: ['', Validators.required],
+  productDetails: ['', this.conditionalValidators<string>('productCategory',
+      [Validators.required],
+      (productCategory) => productCategory === 'electronics' || productCategory === 'books'
+  )],
+  productRating: [5, [Validators.min(1), Validators.max(5)]],
+  reviewComments: ['', this.conditionalValidators<number>('productRating',
+      [Validators.required],
+      (productRating) => productRating < 3
+  )],
+  hasPromotion: [false],
+  promotionPrice: ['', this.conditionalValidators<boolean>('hasPromotion',
+      [Validators.required, Validators.min(1)],
+      (hasPromotion, formControl) => hasPromotion === true && formControl.value < formControl.parent?.get('productPrice')?.value
+  )],
+  hasShipping: [true],
+  shippingCost: ['', this.conditionalValidators<boolean>('hasShipping',
+      [Validators.required, Validators.min(0)],
+      (hasShipping, shippingControl) => hasShipping === true && ((shippingControl.value > 0 && shippingControl.value < formControl.parent?.get('productPrice')?.value * 0.1) || shippingControl.value === 0)
+  )]
+});
+
+// let's break it down!
+
+// productCategory: This is a field in which the seller is required to input the category of 
+// the product they're listing. It could be any string, but for the purpose of this form, 
+// we're considering the validation for 'electronics' and 'books'.
+
+// productDetails: This field is a conditional field that's dependent on the productCategory. 
+// As per our form design, detailed product information is necessary when the product belongs 
+// to 'electronics' or 'books' category. This is implemented using conditionalValidators, which
+// make productDetails a required field only when the productCategory is either 'electronics' 
+// or 'books'.
+
+//productRating: This field represents the rating of the product, where the seller can 
+// specify a rating between 1 and 5.
+
+//reviewComments: This is another conditional field that depends on the productRating. 
+// If the productRating is less than 3, the form expects the seller to provide review 
+// comments to justify this low rating. Again, conditionalValidators is at work here, 
+// making reviewComments a required field only when the productRating is less than 3.
+
+//Now, why is this so amazing? The power and flexibility of conditionalValidators lie in their 
+// ability to adapt to different conditions, enhancing the dynamics of form validation.
+
+  //It allows you to handle multiple scenarios within your form, reducing the complexity and
+// the number of checks you would have to perform otherwise. It provides a highly flexible
+// approach to handle form validation by not only allowing conditions based on other fields'
+// values, but also based on the field's own value, like we did with promotionPrice and 
+// shippingCost.
+
+ // In addition, by providing an easier way to create dynamic forms, it enhances the user 
+// experience. It only enforces validation rules when it's needed, avoiding unnecessary inputs 
+// from users, and making the form filling process more intuitive and efficient. 
+// This is particularly beneficial in complex forms with many fields and rules.
+
+//In summary, conditionalValidators is a supercharged validation mechanism that brings both 
+// power and flexibility to your forms, making them smarter, more dynamic, and user-friendly.
+// It's a great tool for developers to create advanced forms with complex validation scenarios.
 ```   
 ___ 
 ## conditionalRequiredValidator
@@ -185,13 +240,16 @@ This `conditionalRequiredValidator` function is a custom validation function in 
 > Reactive Form Validation
 ```js 
 //first use Case  
-this.sampleForm = this.fb.group({ checkbox: [false],  
- checkboxDependent: [null, this.conditionalRequiredValidator( 'checkbox', control => control.value === true  
- )] });   
+this.sampleForm = this.fb.group({ 
+ checkbox: [false],  
+ checkboxDependent: [null, this.conditionalRequiredValidator( 'checkbox', control => control.value === true)] 
+});   
  
 //second use case  
-this.sampleForm = this.fb.group({ selectField: ['defaultOption'],  
-dependentField: [null, this.conditionalRequiredValidator( 'selectField', control => control.value === 'specificOption','This field is required when specific option is selected in the dropdown.' )] });  
+this.sampleForm = this.fb.group({ 
+  selectField: ['defaultOption'],  
+  dependentField: [null, this.conditionalRequiredValidator( 'selectField', control => control.value === 'specificOption','This field is required when specific option is selected in the dropdown.' )] 
+});  
 ```   
 
 ___ 
@@ -200,10 +258,9 @@ coRequiredValidator is a custom validator that checks if at least one of a group
 > Reactive Form Validation
 ```js
 this.demoForm = this.fb.group({    
-  email: ['',[this.ngJoyDynamicValidatorsService.coRequiredValidator('email', 'phone', 'Either field1 or field2 is required.')    
-  ]],    
-  phone: ['',[this.ngJoyDynamicValidatorsService.coRequiredValidator('email', 'phone', 'Either field1 or field2 is required.')    
-]], });  
+  email: ['',[this.ngJoyDynamicValidatorsService.coRequiredValidator('email', 'phone', 'Either field1 or field2 is required.')]],    
+  phone: ['',[this.ngJoyDynamicValidatorsService.coRequiredValidator('email', 'phone', 'Either field1 or field2 is required.')]]
+});  
 ``` 
 ___   
 ## ibanValidator
@@ -310,9 +367,9 @@ This validator can be useful when you have a dynamic form where users can add or
 > Reactive Form Validation
 ```js
  aliases: this.fb.array([    
-   this.fb.control('') 
-   ],
- {validators: [this.ngJoyValidatorsService.allFieldsFilled()]
+   this.fb.control('')
+  ],
+    {validators: [this.ngJoyValidatorsService.allFieldsFilled()]
  })   
 ``` 
 ___ 
@@ -322,8 +379,7 @@ The `minMaxArrayLength` function is a custom validator in Angular that checks if
 ```js
  aliases: this.fb.array([    
    this.fb.control('')
-   ],
-    {validators: [this.ngJoyValidatorsService.minMaxArrayLength(3, 7, "Min 3 aliases", "Max 7 aliases")]
+   ], {validators: [this.ngJoyValidatorsService.minMaxArrayLength(3, 7, "Min 3 aliases", "Max 7 aliases")]
 })  
 ``` 
 ___   
@@ -710,24 +766,23 @@ Check whether the value of two formControls are same or not .Below  is an exampl
   digit: true,    
   specialCharacter: true    
   },message: 'Password must have at least one digit, one special character, and be between 5 and 10 characters in length.'
-   }), Validators.required]],
+   }), 
+  Validators.required]],
  repeatPass: ['', [this.ngJoyValidatorsService.compare('password'), Validators.required]
-  ],   
+
 ```   
 ## Upcoming Form Validations
 1. BIC (Bank Identifier Code) Validator
 2. Phone Number Validator
 
 ## Goal
-To create best client-side angular reactive validations , supports rapid development of forms with advanced and complex validations, and simplifies the implementation process with concise coding.
+To create the best client-side angular reactive validations , supports rapid development of forms with advanced and complex validations, and simplifies the implementation process with concise coding.
 
 ## Contributing
 Cool, you're thinking of helping improve this library? That's awesome! No contribution is too small - from a single character tweak to major code or doc updates. Even if you're not quite ready to write code or docs, you can still chip in by reporting issues or testing patches. Every bit helps!
 
-
 ## Need Help
 Please ask your questions , https://ngjoy.dev
-
 
 ## Feature Request
 You can request a new feature by contacting me https://ngjoy.dev
